@@ -13,7 +13,12 @@ const options = {
   ca: ca
 };
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => {
+  fs.readFile('home.html', (err, data) => {
+    if (err) throw err;
+    res.end(data);
+  });
+})
 
 const https = require('https');
 https.createServer(options, app).listen(443);
